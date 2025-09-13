@@ -3,21 +3,45 @@
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
+
     <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-      <a class="navbar-brand" href="#">
-        <img src="/png-transparent-sacoa-hd-logo-thumbnail-removebg-preview.png" alt="" height="50px">
+      
+      <a class="navbar-brand" routerLink="/home">
+        <img src="/png-transparent-sacoa-hd-logo-thumbnail-removebg-preview.png" alt="logo" height="50px">
       </a>
+
+      
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/home">Home</a>
+          <a class="nav-link active" routerLink="/home">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/quien-soy">Quien soy?</a>
+          <a class="nav-link" routerLink="/quien-soy">Quién soy?</a>
         </li>
       </ul>
-      <li class="d-flex nav-item">
-        <a class="btn btn-primary" href="/login">Login</a>
-      </li>
+
+      
+      <ul class="navbar-nav">
+        
+        <ng-container *ngIf="user; else notLogged">
+          <li class="nav-item d-flex align-items-center me-2">
+            <span>{{ user.email }}</span>
+          </li>
+          <li class="nav-item">
+            <button class="btn btn-outline-danger" (click)="logout()">Logout</button>
+          </li>
+        </ng-container>
+
+        
+        <ng-template #notLogged>
+          <li class="nav-item me-2">
+            <a class="btn btn-outline-primary" routerLink="/login">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="btn btn-primary" routerLink="/registro">Registro</a>
+          </li>
+        </ng-template>
+      </ul>
     </div>
   </div>
 </nav>

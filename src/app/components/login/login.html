@@ -1,52 +1,39 @@
-<div class="d-flex flex-column align-items-center justify-content-center vh-100 bg-light">
-    <img src="/png-transparent-sacoa-hd-logo-thumbnail-removebg-preview.png" alt="" class="">
-    <main class="card shadow p-4" style="max-width: 400px; width: 100%;">
+<div class="bg-light vh-100">
+    <div class="d-flex flex-column align-items-center justify-content-center pt-5">
+        <img src="/png-transparent-sacoa-hd-logo-thumbnail-removebg-preview.png" alt="" class="">
+        <main class="card shadow p-4" style="max-width: 400px; width: 100%;">
+            
+            <h1 class="h4 mb-3 text-center">Iniciar sesión</h1>
+
+            <form (ngSubmit)="login()" #loginForm="ngForm">
+            
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input id="email" type="email" class="form-control" name="email" [(ngModel)]="email" required value="Santiago"/>
+            </div>
+
+            
+            <div class="mb-3">
+                <label for="password" class="form-label">Contraseña</label>
+                <input id="password" type="password" class="form-control" name="password" [(ngModel)]="password" required/>
+            </div>
+            <p *ngIf="mensaje" [style.color]="mensajeColor" class="message">{{ mensaje }}</p>
+            
+
+            <button type="submit" class="btn btn-primary w-100">
+                Entrar
+            </button>
+            </form>
+            <a class="fw-bolder" href="/registro">No tenes una cuenta? Registrate</a>
+        </main>
         
-        <h1 class="h4 mb-3 text-center">Iniciar sesión</h1>
-
-        <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
-        <!-- Email -->
-        <div class="mb-3">
-            <label for="email" class="form-label">Email</label>
-            <input
-            id="email"
-            type="email"
-            class="form-control"
-            name="email"
-            [(ngModel)]="email"
-            required
-            />
+        <div>
+            <button class="btn btn-primary" type="submit" (click)="email='adm@gmail.com'" (click)="password='admadm'">Administrador</button>
+            <button class="btn btn-primary" type="submit" (click)="email='user1@gmail.com'" (click)="password='user1user1'">Usuario 1</button>
+            <button class="btn btn-primary" type="submit" (click)="email='user2@gmail.com'" (click)="password='user2user2'">Usuario 2</button>
         </div>
+        
 
-        <!-- Password -->
-        <div class="mb-3">
-            <label for="password" class="form-label">Contraseña</label>
-            <input
-            id="password"
-            type="password"
-            class="form-control"
-            name="password"
-            [(ngModel)]="password"
-            required
-            />
-        </div>
-
-        <!-- Recordarme -->
-        <div class="mb-3 form-check">
-            <input
-            type="checkbox"
-            class="form-check-input"
-            id="remember"
-            name="remember"
-            [(ngModel)]="remember"
-            />
-            <label class="form-check-label" for="remember">Recordarme</label>
-        </div>
-
-        <!-- Botón -->
-        <button type="submit" class="btn btn-primary w-100">
-            Entrar
-        </button>
-        </form>
-    </main>
+    </div>
 </div>
+

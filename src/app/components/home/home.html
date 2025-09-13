@@ -1,6 +1,11 @@
 <app-navbar></app-navbar>
 
-<div class="container mt-4">
-  <h1>Bienvenido al Home</h1>
-  <p>Este es el contenido de la página principal.</p>
+<div class="home-container">
+  <h1>Bienvenido a la Sala de Juegos</h1>
+
+  <h2>Accesos a juegos</h2>
+  <button (click)="goToGame('/juego1')">Juego 1</button>
+  <button (click)="goToGame('/juego2')">Juego 2</button>
 </div>
+
+
