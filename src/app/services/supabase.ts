@@ -27,7 +27,7 @@ export class SupabaseService {
       .insert({ user_id: userId, content });
   }
 
-  // subscribirse a nuevos mensajes
+  // subscribirse a nuevos mensajess
   subscribeMessages(callback: (payload: any) => void) {
     return this.client
       .channel('room1')
