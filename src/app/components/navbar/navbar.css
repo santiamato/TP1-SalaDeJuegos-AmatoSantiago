@@ -1,0 +1,150 @@
+/* ===========================
+   Reset general
+   =========================== */
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/* ===========================
+   Navbar moderno (glassmorphism)
+   =========================== */
+.barra-navegacion {
+  width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  background: rgba(0, 0, 0, 0.35);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+  padding: 0.5rem 2rem;
+}
+
+/* Contenedor principal: flex */
+.menu-desktop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+ul{
+  list-style-type: none;
+}
+/* Izquierda: logo + links */
+.grupo-izquierda {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.marca-navegacion img {
+  height: 50px;
+  filter: drop-shadow(0 0 5px rgba(255,255,255,0.7));
+  transition: transform 0.3s ease;
+}
+
+.marca-navegacion img:hover {
+  transform: scale(1.05);
+}
+
+.lista-enlaces {
+  display: flex;
+  gap: 1rem;
+}
+
+.lista-enlaces a {
+  color: #f0f0f0;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.lista-enlaces a.activo,
+.lista-enlaces a:hover {
+  color: #ffd166;
+  text-shadow: 0 0 6px rgba(255,209,102,0.8);
+}
+
+/* Derecha: usuario y botones */
+.lista-usuario {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.info-usuario {
+  color: #f0f0f0;
+  font-weight: 600;
+}
+
+/* Botones */
+.boton-principal {
+  background: #ffd166;
+  color: #111;
+  border: none;
+  padding: 0.4rem 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.boton-principal:hover {
+  background: #f7c948;
+  box-shadow: 0 0 12px rgba(255,209,102,0.7);
+}
+
+.boton-outline {
+  background: none;
+  border: 2px solid #ffd166;
+  padding: 0.4rem 1rem;
+  border-radius: 8px;
+  color: #ffd166;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.boton-outline:hover {
+  background: #ffd166;
+  color: #111;
+  box-shadow: 0 0 10px rgba(255,209,102,0.7);
+}
+
+.boton-peligro {
+  background: none;
+  border: 2px solid #f94144;
+  color: #f94144;
+  font-weight: 600;
+  padding: 0.4rem 1rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.boton-peligro:hover {
+  background: #f94144;
+  color: #fff;
+  box-shadow: 0 0 10px rgba(249,65,68,0.7);
+}
+
+/* ===========================
+   Responsive
+   =========================== */
+@media (max-width: 768px) {
+  .menu-desktop {
+    flex-wrap: wrap; /* ajusta todo en una fila o varias si es necesario */
+  }
+
+  .grupo-izquierda {
+    gap: 0.5rem;
+  }
+
+  .lista-enlaces {
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .lista-usuario {
+    margin-left: auto; /* fuerza que quede a la derecha */
+    gap: 0.5rem;
+  }
+}

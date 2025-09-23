@@ -1,47 +1,36 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router} from '@angular/router';
-import { createClient } from '@supabase/supabase-js';
-
-const supabase = createClient('https://gyqjtqrbnkpksinxycat.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd5cWp0cXJibmtwa3Npbnh5Y2F0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTcyODQzMjIsImV4cCI6MjA3Mjg2MDMyMn0.vTO3WbkEV1qAJUJMQZfksudpN9cmvaKwKrUGthJ2-_g')
+import { Router } from '@angular/router';
+import { ErrorComponent } from '../error/error';
+import { AuthService } from '../../services/auth';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-registro',
-  imports: [FormsModule, CommonModule],
+  standalone: true,
+  imports: [FormsModule, ErrorComponent, CommonModule],
   templateUrl: './registro.html',
-  styleUrl: './registro.css'
+  styleUrls: ['./registro.css'],
 })
 export class Registro {
   email = '';
   password = '';
-  remember = false;
-  mensajeColor = 'red';
-  mensaje = '';
+  errorObject: any = null;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private authService: AuthService) {}
 
-  ngOnInit() {
-    this.mensaje = '';
-  }
+  async registro() {
+    this.errorObject = { email: this.email, password: this.password };
 
-  registro(){
-    supabase.auth.signUp({
-      email: this.email,
-      password: this.password,
-    }).then(({data, error}) => {
-      if(error){
-        console.error('Error:', error.message);
-        if(error.message.includes("already registered")){
-          this.mensajeColor = 'red';
-          this.mensaje = `❌ Ya se encuentra registrado!`;
-        }else{
-          this.mensajeColor = 'red';
-          this.mensaje = `❌ Correo o contraseña incorrectos`;
-        }
-      }else{
-        this.router.navigate(['/home']);
-      }
-    })
+    if (!this.email || !this.password || this.password.length < 6) return;
+
+    const result = await this.authService.registrar(this.email, this.password);
+
+    this.errorObject = result.error
+      ? { tipo: 'supabase', mensaje: result.error.message, email: this.email, password: this.password }
+      : { tipo: 'success', email: this.email, password: this.password };
+
+    if (!result.error) this.router.navigate(['/home']);
+
   }
 }

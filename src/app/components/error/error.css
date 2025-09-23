@@ -1,0 +1,8 @@
+.error-mensaje {
+  font-weight: 600;
+  margin-top: 0.5rem;
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  background: rgba(249, 65, 68, 0.1);
+  border-left: 4px solid #f94144;
+}

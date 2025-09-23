@@ -1,1 +1,23 @@
-<p>chat works!</p>
+<app-navbar></app-navbar>
+
+<div class="contenedor-chat">
+  <h3>Chat</h3>
+  <div class="mensajes" #scrollMe>
+    <div 
+      *ngFor="let msg of mensajes" 
+      [ngClass]="{'mio': msg.user_id === usuario.id, 'otro': msg.user_id !== usuario.id}" 
+      class="mensaje"
+    >
+      <div class="contenido-mensaje">
+        <strong *ngIf="msg.user_id !== usuario.id">{{ msg.user_email }}: </strong>
+        {{ msg.contenido }}
+        <span class="hora">{{ formatearFecha(msg.fecha_creacion) }}</span>
+      </div>
+    </div>
+  </div>
+
+  <form (ngSubmit)="enviarMensaje()" class="entrada-chat">
+    <input [(ngModel)]="nuevoMensaje" name="msg" placeholder="Escribe un mensaje..." required />
+    <button type="submit">Enviar</button>
+  </form>
+</div>

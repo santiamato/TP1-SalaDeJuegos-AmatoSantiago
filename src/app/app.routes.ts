@@ -3,6 +3,7 @@ import { Home } from './components/home/home';
 import { Login } from './components/login/login';
 import { QuienSoy } from './components/quien-soy/quien-soy';
 import { Registro } from './components/registro/registro';
+import { ChatComponent } from './components/chat/chat';
 
 export const routes: Routes = [
     {
@@ -25,5 +26,9 @@ export const routes: Routes = [
     {
         path: 'quien-soy',
         component: QuienSoy
+    },
+    {
+        path: 'chat',
+        component: ChatComponent
     }
 ];

@@ -1,11 +1,28 @@
 <app-navbar></app-navbar>
 
-<div class="home-container">
-  <h1>Bienvenido a la Sala de Juegos</h1>
+<div class="contenedor-principal">
+  <h1>Bienvenido a Sacoa</h1>
 
-  <h2>Accesos a juegos</h2>
-  <button (click)="goToGame('/juego1')">Juego 1</button>
-  <button (click)="goToGame('/juego2')">Juego 2</button>
+  <h2>Elige a qué juego quieres jugar</h2>
+  
+  <section class="contenedor-juegos">
+    <div class="rejilla-cartas">
+      <div class="carta-juego" (click)="irAJuego('/ahorcado')">
+        <img src="/imagenAhorcado.png" alt="Juego 1" class="imagen-juego"/>
+        <h3 class="nombre-juego">Ahorcado</h3>
+      </div>
+      <div class="carta-juego" (click)="irAJuego('/otro-juego')">
+        <img src="/playing-card-13-svgrepo-com.svg" alt="Juego 2" class="imagen-juego" />
+        <h3 class="nombre-juego">Otro Juego</h3>
+      </div>
+      <div class="carta-juego" (click)="irAJuego('/tercer-juego')">
+        <img src="/imagenAhorcado.png" alt="Juego 3" class="imagen-juego" />
+        <h3 class="nombre-juego">Tercer Juego</h3>
+      </div>
+      <div class="carta-juego" (click)="irAJuego('/cuarto-juego')">
+        <img src="/imagenAhorcado.png" alt="Juego 4" class="imagen-juego" />
+        <h3 class="nombre-juego">Cuarto Juego</h3>
+      </div>
+    </div>
+  </section>
 </div>
-
-

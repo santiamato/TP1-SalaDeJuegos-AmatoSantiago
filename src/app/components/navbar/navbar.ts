@@ -23,6 +23,8 @@ export class Navbar {
     this.cambioAuth();
   }
 
+  
+
   private async checkearUsuario() {
     const { data } = await supabase.auth.getUser();
     this.user = data.user;
