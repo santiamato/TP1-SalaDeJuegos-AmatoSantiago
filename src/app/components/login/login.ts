@@ -15,7 +15,7 @@ import { AuthService } from '../../services/auth';
 export class Login {
   email = '';
   password = '';
-  // se guarda la info q se ingreso en el login
+
   errorObject: {
     email?: string;
     password?: string;
@@ -34,7 +34,7 @@ export class Login {
 
     const { success, error } = await this.authService.login(this.email, this.password);
 
-    //si hubo error actualiza el tipo de error a supabase, asi se puede mostrar el error correcto desde el compo error
+    
     if (error) {
       this.errorObject = { tipo: 'supabase', mensaje: error.message };
     }

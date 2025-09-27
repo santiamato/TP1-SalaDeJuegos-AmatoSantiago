@@ -2,7 +2,7 @@
   max-width: 800px;
   margin: 4rem auto;
   padding: 1rem 2rem;
-  background-color: #aa6e6e; /* color similar a bg-secondary */
+  background-color: #aa6e6e; 
   color: white;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.3);
@@ -26,7 +26,7 @@
   width: 180px;
   height: 180px;
   object-fit: cover;
-  border-radius: 50%; /* imagen redonda */
+  border-radius: 50%; 
   box-shadow: 0 0 8px rgba(0,0,0,0.5);
 }
 
@@ -37,7 +37,6 @@
   text-align: center;
 }
 
-/* Responsividad */
 @media (min-width: 600px) {
   .about-image {
     margin-right: 2rem;

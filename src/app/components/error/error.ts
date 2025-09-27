@@ -15,7 +15,6 @@ export class ErrorComponent {
       return;
     }
 
-    // Errores, campos vacios
     if (value.email === '' && value.password === '') {
       this.mensaje = "Completa los campos email y contraseña";
       this.color = 'red';
@@ -32,7 +31,7 @@ export class ErrorComponent {
       return;
     }
     if (value.password && value.password.length < 6) {
-      this.mensaje = "⚠️ La contraseña debe tener al menos 6 caracteres";
+      this.mensaje = "La contraseña debe tener al menos 6 caracteres";
       this.color = 'orange';
       return;
     }
@@ -41,13 +40,13 @@ export class ErrorComponent {
     if (value.tipo === 'supabase') {
       const mensajeError = value.mensaje?.toLowerCase() || '';
       if (mensajeError.includes("already") && mensajeError.includes("registered")) {
-        this.mensaje = "❌ Ya se encuentra registrado!";
+        this.mensaje = "Ya se encuentra registrado!";
         this.color = 'red';
       } else if (mensajeError.includes("invalid login")) {
-        this.mensaje = "❌ Correo o contraseña incorrectos";
+        this.mensaje = "Correo o contraseña incorrectos";
         this.color = 'red';
       } else {
-        this.mensaje = `❌ ${value.mensaje}`;
+        this.mensaje = `${value.mensaje}`;
         this.color = 'red';
       }
       return;

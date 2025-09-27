@@ -1,0 +1,50 @@
+<app-navbar></app-navbar>
+
+<div class="mayor-menor-container">
+  <h2>Mayor o Menor</h2>
+
+    <div class="cartas-flex">
+        <div class="card-container">
+            <div class="card">
+                <div *ngIf="cartaActual" class="back">
+                    <div class="red"></div>
+                    <div class="text-top">{{ cartaActual }}</div>
+                    <div class="text-center">{{ cartaActual }}</div>
+                    <div class="text-bottom">{{ cartaActual }}</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-container" [class.flipped]="mostrarCartaSiguiente">
+            <div class="card">
+                <div class="back">
+                <div class="red"></div>
+                <div class="text">?</div>
+                </div>
+
+                <div class="front">
+                <div class="red"></div>
+                <div class="text-top">{{ cartaSiguiente }}</div>
+                <div class="text-center">{{ cartaSiguiente }}</div>
+                <div class="text-bottom">{{ cartaSiguiente }}</div>
+                </div>
+            </div>
+            </div>
+
+    </div>
+
+  <p class="puntos">Puntos: {{ puntos }}</p>
+
+  <div *ngIf="!juegoTerminado" class="botones">
+    <button (click)="adivinar(true)" class="btn-guess">Mayor</button>
+    <button (click)="adivinar(false)" class="btn-guess">Menor</button>
+    <button *ngIf="mostrarCartaSiguiente" (click)="siguienteTurno()" class="btn-guess">Siguiente</button>
+  </div>
+
+  <p class="mensaje">{{ mensaje }}</p>
+
+  <div *ngIf="juegoTerminado" class="final">
+    <p>Juego terminado. Tu puntaje: {{ puntos }}</p>
+    <button (click)="reiniciarJuego()" class="btn-restart">Reiniciar</button>
+  </div>
+</div>

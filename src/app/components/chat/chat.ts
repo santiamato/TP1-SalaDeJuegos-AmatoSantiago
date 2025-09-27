@@ -27,7 +27,7 @@ interface Mensaje {
   styleUrls: ['./chat.css']
 })
 export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
-  // Decorador para manejar el scroll del chat automáticamente
+  // decorador para manejar el scroll del chat automáticamente
   @ViewChild('scrollMe') private contenedorScroll!: ElementRef;
 
   mensajes: Mensaje[] = [];
@@ -38,7 +38,6 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
   constructor(private router: Router, private authService: AuthService) {}
 
   async ngOnInit() {
-    // Devuelve usuarioo autenticado
     const { data: { user } } = await this.authService.ObtenerUsuario();
     this.usuario = user;
 
@@ -47,7 +46,6 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
       return;
     }
 
-    // traer los mensajes existentes con mail
     const { data: datosMensajes, error } = await supabase
       .from('mensajes_con_email')
       .select('*')

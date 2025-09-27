@@ -30,5 +30,9 @@ export const routes: Routes = [
     {
         path: 'chat',
         component: ChatComponent
-    }
+    },
+    {
+        path: 'juegos',
+        loadChildren: () => import('./juegos/juegos-module').then(m => m.JuegosModule)
+    },
 ];

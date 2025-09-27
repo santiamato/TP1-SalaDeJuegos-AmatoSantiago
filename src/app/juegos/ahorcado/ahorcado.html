@@ -1,0 +1,38 @@
+<app-navbar></app-navbar>
+
+<div class="ahorcado-container">
+  <h2>Juego del Ahorcado</h2>
+
+  <img [src]="'ahorcado' + (6 - intentos) + '.png'" alt="Ahorcado" class="imagen-ahorcado"/>
+
+  <p class="palabra">
+    <span *ngFor="let letra of palabraMostrada; let i = index">{{ letra }}</span>
+  </p>
+
+  <div class="botones-letras">
+    <button 
+        *ngFor="let letra of letras" 
+        (click)="elegirLetra(letra)"
+        [disabled]="letrasUsadas.includes(letra) || juegoTerminado"
+        class="keycap">
+        <span class="letter">{{ letra }}</span>
+    </button>
+  </div>
+
+
+  <p>Intentos restantes: {{ intentos }}</p>
+  
+
+<div class="card" *ngIf="juegoTerminado">
+    <span *ngIf="juegoGanado">¡Ganaste!</span>
+    <span *ngIf="juegoPerdido">Perdiste, la palabra era: {{ elegirPalabraAleatoria() }}</span>
+    <a class="social-link" routerLink="/home">
+        Volver al inicio
+    </a>
+    
+    <button class="social-link s-button" (click)="reiniciarJuego()">
+        Reintentar
+    </button>
+    
+    </div>
+</div>
