@@ -1,0 +1,35 @@
+.juego-colores-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.colores {
+  display: grid;
+  grid-template-columns: repeat(2, 120px);
+  gap: 15px;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+button {
+  width: 120px;
+  height: 120px;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.rojo { background: red; }
+.azul { background: blue; }
+.verde { background: green; }
+.amarillo { background: yellow; }
+
+.active {
+  box-shadow: 0 0 20px white;
+  opacity: 0.7;
+}
+
+.acciones {
+  margin-top: 20px;
+}

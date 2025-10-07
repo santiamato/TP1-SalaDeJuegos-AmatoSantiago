@@ -1,0 +1,39 @@
+<app-navbar></app-navbar>
+
+<mat-card *ngIf="!cargando && pregunta" class="tarjeta-trivia">
+  <mat-card-title class="titulo-pregunta">Pregunta</mat-card-title>
+  <mat-card-subtitle class="subtitulo-puntaje">
+    Puntaje: {{ puntaje }}
+  </mat-card-subtitle>
+
+  <img *ngIf="pregunta.imagen" [src]="pregunta.imagen" class="imagen-trivia" alt="Imagen relacionada" />
+
+  <p class="texto-pregunta">{{ pregunta.pregunta }}</p>
+
+  <div class="contenedor-opciones">
+    <div *ngFor="let opcion of pregunta.opciones" class="item-opcion">
+      <button
+        mat-raised-button
+        class="boton-opcion"
+        [disabled]="respuestaBloqueada"
+        [ngClass]="{
+          correcta: opcionSeleccionada === opcion && esCorrecta,
+          incorrecta: opcionSeleccionada === opcion && !esCorrecta}"
+        (click)="responder(opcion)">
+        {{ opcion }}
+        <span *ngIf="opcionSeleccionada === opcion && esCorrecta"> ✅ Correcta</span>
+      </button>
+    </div>
+  </div>
+</mat-card>
+
+<div *ngIf="mostrarContinuar" class="overlay">
+  <div class="tarjeta-overlay">
+    <h2 *ngIf="esCorrecta" class="texto-correcto">¡Correcto!</h2>
+    <h2 *ngIf="!esCorrecta" class="texto-incorrecto">¡Incorrecto!</h2>
+    <p *ngIf="!esCorrecta">La respuesta correcta era: <strong>{{ pregunta?.correcta }}</strong></p>
+    <button class="boton-siguiente" (click)="siguientePregunta()">Siguiente pregunta</button>
+  </div>
+</div>
+
+<mat-progress-spinner *ngIf="cargando" class="spinner-cargando" mode="indeterminate"></mat-progress-spinner>

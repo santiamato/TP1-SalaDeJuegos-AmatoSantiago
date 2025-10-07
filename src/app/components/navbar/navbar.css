@@ -1,14 +1,8 @@
-/* ===========================
-   Reset general
-   =========================== */
 * {
   margin: 0;
   box-sizing: border-box;
 }
 
-/* ===========================
-   Navbar moderno (glassmorphism)
-   =========================== */
 .barra-navegacion {
   width: 100%;
   position: sticky;
@@ -21,7 +15,6 @@
   padding: 0.5rem 2rem;
 }
 
-/* Contenedor principal: flex */
 .menu-desktop {
   display: flex;
   justify-content: space-between;
@@ -31,7 +24,6 @@
 ul{
   list-style-type: none;
 }
-/* Izquierda: logo + links */
 .grupo-izquierda {
   display: flex;
   align-items: center;
@@ -62,11 +54,10 @@ ul{
 
 .lista-enlaces a.activo,
 .lista-enlaces a:hover {
-  color: #ffd166;
-  text-shadow: 0 0 6px rgba(255,209,102,0.8);
+  color: #f94144;
+  text-shadow: 0 0 6px rgba(236, 73, 73, 0.8);
 }
 
-/* Derecha: usuario y botones */
 .lista-usuario {
   display: flex;
   gap: 0.5rem;
@@ -78,9 +69,8 @@ ul{
   font-weight: 600;
 }
 
-/* Botones */
 .boton-principal {
-  background: #ffd166;
+  background: #f94144;
   color: #111;
   border: none;
   padding: 0.4rem 1rem;
@@ -90,22 +80,22 @@ ul{
 }
 
 .boton-principal:hover {
-  background: #f7c948;
-  box-shadow: 0 0 12px rgba(255,209,102,0.7);
+  background: #f94144;
+  box-shadow: 0 0 12px rgba(219, 73, 68, 0.7);
 }
 
 .boton-outline {
   background: none;
-  border: 2px solid #ffd166;
+  border: 2px solid #f94144;
   padding: 0.4rem 1rem;
   border-radius: 8px;
-  color: #ffd166;
+  color: #f94144;
   font-weight: 600;
   transition: all 0.3s ease;
 }
 
 .boton-outline:hover {
-  background: #ffd166;
+  background: #f94144;
   color: #111;
   box-shadow: 0 0 10px rgba(255,209,102,0.7);
 }
@@ -126,12 +116,9 @@ ul{
   box-shadow: 0 0 10px rgba(249,65,68,0.7);
 }
 
-/* ===========================
-   Responsive
-   =========================== */
 @media (max-width: 768px) {
   .menu-desktop {
-    flex-wrap: wrap; /* ajusta todo en una fila o varias si es necesario */
+    flex-wrap: wrap; 
   }
 
   .grupo-izquierda {
@@ -144,7 +131,7 @@ ul{
   }
 
   .lista-usuario {
-    margin-left: auto; /* fuerza que quede a la derecha */
+    margin-left: auto; 
     gap: 0.5rem;
   }
 }

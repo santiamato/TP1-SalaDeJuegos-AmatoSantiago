@@ -1,0 +1,195 @@
+body {
+  background-color: #f57474;
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  color: #333;
+}
+
+app-navbar {
+  width: 100%;
+  margin-bottom: 20px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.tarjeta-trivia {
+  max-width: 600px;
+  width: 100%;
+  background: linear-gradient(135deg, #ffffff, #f8f9fa);
+  border-radius: 20px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  padding: 20px;
+  margin: 20px auto;
+  text-align: center;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.titulo-pregunta {
+  font-size: 1.5em;
+  color: #e74c3c;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+.subtitulo-puntaje {
+  color: #27ae60;
+  font-size: 1.1em;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+.imagen-trivia {
+  max-width: 100%;
+  max-height: 300px;
+  height: auto;
+  border-radius: 15px;
+  margin: 15px 0;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+}
+
+.texto-pregunta {
+  font-size: 1.2em;
+  line-height: 1.5;
+  color: #2c3e50;
+  margin: 20px 0;
+  padding: 0 20px;
+  font-style: italic;
+}
+
+.contenedor-opciones {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.item-opcion {
+  display: flex;
+  justify-content: center;
+}
+
+.boton-opcion {
+  background: linear-gradient(135deg, #3498db, #2980b9);
+  color: white;
+  font-size: 1em;
+  padding: 12px 24px;
+  border-radius: 25px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(52,152,219,0.3);
+  min-width: 200px;
+}
+
+.boton-opcion:hover {
+  background: linear-gradient(135deg, #2980b9, #3498db);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(52,152,219,0.4);
+}
+
+.boton-opcion.correcta {
+  background: linear-gradient(135deg, #2ecc71, #27ae60);
+  box-shadow: 0 4px 10px rgba(46,204,113,0.5);
+}
+
+.boton-opcion.incorrecta {
+  background: linear-gradient(135deg, #e74c3c, #c0392b);
+  box-shadow: 0 4px 10px rgba(231,76,60,0.5);
+}
+
+.spinner-cargando {
+  margin: 50px auto;
+  display: block;
+  color: #e74c3c;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.3s ease-in-out;
+  z-index: 10;
+}
+
+.tarjeta-overlay {
+  background: white;
+  padding: 2rem 3rem;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+  animation: pop 0.3s ease-in-out;
+  max-width: 400px;
+  width: 80%;
+}
+
+.texto-correcto {
+  color: #27ae60;
+  font-weight: bold;
+}
+
+.texto-incorrecto {
+  color: #e74c3c;
+  font-weight: bold;
+}
+
+.boton-siguiente {
+  background: linear-gradient(135deg, #3498db, #2980b9);
+  color: white;
+  font-size: 1.1em;
+  font-weight: bold;
+  padding: 12px 28px;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  box-shadow: 0 6px 12px rgba(52,152,219,0.4);
+  transition: all 0.3s ease;
+  margin-top: 15px;
+}
+
+.boton-siguiente:hover {
+  background: linear-gradient(135deg, #2980b9, #3498db);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(52,152,219,0.5);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pop {
+  0% { transform: scale(0.8); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@media (max-width: 768px) {
+  .tarjeta-trivia {
+    margin: 10px;
+    padding: 15px;
+  }
+
+  .titulo-pregunta {
+    font-size: 1.3em;
+  }
+
+  .texto-pregunta {
+    font-size: 1.1em;
+    padding: 0 10px;
+  }
+
+  .boton-opcion {
+    min-width: 150px;
+    padding: 10px 20px;
+  }
+}

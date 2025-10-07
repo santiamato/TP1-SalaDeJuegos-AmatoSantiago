@@ -1,0 +1,21 @@
+<app-navbar></app-navbar>
+
+<div class="juego-colores-container">
+  <h2>Juego de Colores</h2>
+
+  <p *ngIf="!jugando">Puntaje máximo: {{ mejorPuntaje }}</p>
+  <p *ngIf="jugando">Ronda actual: {{ secuencia.length }}</p>
+
+  <div class="colores">
+    <button 
+      *ngFor="let color of colores"
+      [ngClass]="color"
+      (click)="seleccionar(color)"
+      [disabled]="!puedeJugar">
+    </button>
+  </div>
+
+  <div class="acciones">
+    <button (click)="iniciarJuego()" *ngIf="!jugando">Iniciar Juego</button>
+  </div>
+</div>
