@@ -57,9 +57,8 @@ export class EncuestaComponent {
   }
 
   get checkboxValido() {
-    return this.respuesta2 === true; 
+    return this.respuesta2 === true || this.respuesta2 === false;
   }
-
   get radioValido() {
     return this.respuesta3 !== '';
   }
