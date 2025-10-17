@@ -1,12 +1,8 @@
 import { Component } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { createClient, User } from '@supabase/supabase-js';
-
-const supabase = createClient(
-  'https://gyqjtqrbnkpksinxycat.supabase.co',
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...' 
-);
+import { User } from '@supabase/supabase-js';
+import { SupabaseService } from '../../services/supabase';
 
 @Component({
   selector: 'app-navbar',
@@ -18,7 +14,7 @@ const supabase = createClient(
 export class Navbar {
   user: User | null = null;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private supabaseService: SupabaseService) {
     this.checkearUsuario();
     this.cambioAuth();
   }
@@ -26,18 +22,18 @@ export class Navbar {
   
 
   private async checkearUsuario() {
-    const { data } = await supabase.auth.getUser();
-    this.user = data.user;
+    const user = await this.supabaseService.getUsuarioActual();
+    this.user = user;
   }
 
   private cambioAuth() {
-    supabase.auth.onAuthStateChange((_event, session) => {
+    this.supabaseService.suscribirseAuth((_event, session) => {
       this.user = session?.user ?? null;
     });
   }
 
   async logout() {
-    await supabase.auth.signOut();
+    await this.supabaseService.cerrarSesion();
     this.router.navigate(['/login']);
   }
 }

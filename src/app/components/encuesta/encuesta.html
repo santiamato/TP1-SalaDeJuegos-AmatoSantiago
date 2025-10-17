@@ -1,0 +1,91 @@
+<app-navbar></app-navbar>
+<div class="container py-4">
+  <h1 class="h4 mb-3">Encuesta de satisfaccion</h1>
+
+  <div *ngIf="mensaje" class="alert" [ngClass]="{'alert-success': mensaje.tipo==='ok', 'alert-danger': mensaje.tipo==='error'}">
+    {{ mensaje.texto }}
+  </div>
+
+  <form #f="ngForm" (ngSubmit)="enviar(f)" novalidate>
+    <div class="card mb-3">
+      <div class="card-body">
+        <h2 class="h6">Datos personales</h2>
+
+        <div class="mb-3">
+          <label class="form-label">Nombre y apellido</label>
+          <input name="nombreApellido" [(ngModel)]="nombreApellido" class="form-control"
+                 required minlength="3" maxlength="80" placeholder="Ej: Pedro Fernandez" />
+          <div class="invalid-feedback d-block" *ngIf="f.submitted || f.controls['nombreApellido']?.touched">
+            <span *ngIf="!f.controls['nombreApellido']?.valid">Este campo es requerido (min 3 caracteres)</span>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Edad</label>
+          <input name="edad" [(ngModel)]="edad" type="number" class="form-control" required min="18" max="98" />
+          <div class="invalid-feedback d-block" *ngIf="f.submitted || f.controls['edad']?.touched">
+            <span *ngIf="!edadValida">La edad debe ser entre 18 y 99 años</span>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Telefono</label>
+          <input name="telefono" [(ngModel)]="telefono" class="form-control" required maxlength="10" minlength="8"
+                 inputmode="numeric" (input)="onTelefonoInput($event)" placeholder="Solo num, max 10 caracteres, min 8 caracteres" />
+          <div class="invalid-feedback d-block" *ngIf="f.submitted || f.controls['telefono']?.touched">
+            <span *ngIf="!telefonoValido">Debe contener solo numeros(hasta 10 digitos y min 8)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card mb-3">
+      <div class="card-body">
+        <h2 class="h6">Preguntas</h2>
+
+        <div class="mb-3">
+          <label class="form-label">1) Que te parecio la experiencia general?</label>
+          <textarea name="respuesta1" [(ngModel)]="respuesta1" class="form-control"
+                    rows="3" required minlength="5" maxlength="300"
+                    placeholder="Conta brevemente...">
+          </textarea>
+          <div class="invalid-feedback d-block" *ngIf="f.submitted || f.controls['respuesta1']?.touched">
+            <span *ngIf="!f.controls['respuesta1']?.valid">Este campo es obligatorio(min 5 caracteres)</span>
+          </div>
+        </div>
+
+        <div class="mb-3 form-check">
+          <input id="chk2" type="checkbox" name="respuesta2" [(ngModel)]="respuesta2" class="form-check-input" />
+          <label class="form-check-label" for="chk2">2) Recomendaria esta app a otra persona</label>
+          <div class="invalid-feedback d-block" *ngIf="f.submitted">
+            <span *ngIf="!checkboxValido">Debes marcar la casilla para continuar</span>
+          </div>
+        </div>
+
+        <div class="mb-2">
+          <label class="form-label d-block">3) Como calificarias la dificultad de los juegos?</label>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="respuesta3" id="r1" [(ngModel)]="respuesta3" value="Baja" />
+            <label class="form-check-label" for="r1">Baja</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="respuesta3" id="r2" [(ngModel)]="respuesta3" value="Media" />
+            <label class="form-check-label" for="r2">Media</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="respuesta3" id="r3" [(ngModel)]="respuesta3" value="Alta" />
+            <label class="form-check-label" for="r3">Alta</label>
+          </div>
+          <div class="invalid-feedback d-block" *ngIf="f.submitted">
+            <span *ngIf="!radioValido">Debes elegir una opcion</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button class="btn btn-primary" type="submit" [disabled]="enviando">
+      {{ enviando ? 'Enviando...' : 'Enviar encuesta' }}
+    </button>
+  </form>
+</div>
+

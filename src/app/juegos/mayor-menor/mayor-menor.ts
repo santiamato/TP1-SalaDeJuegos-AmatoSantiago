@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Navbar } from '../../components/navbar/navbar';
+import { SupabaseService } from '../../services/supabase';
 
 @Component({
   selector: 'app-mayor-menor',
@@ -17,6 +18,8 @@ export class MayorMenor implements OnInit {
   juegoTerminado = false;
   mensaje = '';
   mostrarCartaSiguiente = false; 
+
+  constructor(private supabaseService: SupabaseService) {}
 
   ngOnInit() {
     this.iniciarJuego();
@@ -59,6 +62,7 @@ export class MayorMenor implements OnInit {
     } else {
       this.mensaje = `Incorrecto. La carta era ${this.cartaSiguiente}`;
       this.juegoTerminado = true;
+      this.guardarResultado();
     }
   }
 
@@ -74,5 +78,16 @@ export class MayorMenor implements OnInit {
 
   reiniciarJuego() {
     this.iniciarJuego();
+  }
+
+  private async guardarResultado() {
+    const user = await this.supabaseService.getUsuarioActual();
+    if (!user) return;
+    const email = user.email || 'desconocido';
+    try {
+      await this.supabaseService.guardarResultado(email, 'mayor-menor', this.puntos);
+    } catch (e) {
+      console.error('Error guardando resultado (mayor-menor):', e);
+    }
   }
 }

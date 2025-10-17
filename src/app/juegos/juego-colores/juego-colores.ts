@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { Navbar } from '../../components/navbar/navbar';
+import { SupabaseService } from '../../services/supabase';
 
 @Component({
   selector: 'app-juego-colores',
@@ -18,6 +19,8 @@ export class JuegoColores {
   puedeJugar = false;
   mejorPuntaje = 0;
 
+  constructor(private supabaseService: SupabaseService) {}
+
   async iniciarJuego() {
     this.secuencia = [];
     this.inputJugador = [];
@@ -32,7 +35,7 @@ export class JuegoColores {
     this.secuencia.push(randomColor);
     this.inputJugador = [];
 
-    //mostrar secuencia al jugador
+    // mostrar secuencia al jugador
     this.puedeJugar = false;
     for (let i = 0; i < this.secuencia.length; i++) {
       await this.destacarColor(this.secuencia[i]);
@@ -60,9 +63,9 @@ export class JuegoColores {
     if (this.inputJugador[index] !== this.secuencia[index]) {
       this.jugando = false;
       this.puedeJugar = false;
-      alert(`¡Fallaste! Puntaje: ${this.secuencia.length - 1}`);
-      this.mejorPuntaje = Math.max(this.mejorPuntaje, this.secuencia.length - 1);
-
+      const puntaje = this.secuencia.length - 1;
+      this.mejorPuntaje = Math.max(this.mejorPuntaje, puntaje);
+      await this.guardarResultado(puntaje);
       return;
     }
 
@@ -70,4 +73,16 @@ export class JuegoColores {
       await this.agregarColor();
     }
   }
+
+  private async guardarResultado(puntaje: number) {
+    const user = await this.supabaseService.getUsuarioActual();
+    if (!user) return;
+    const email = user.email || 'desconocido';
+    try {
+      await this.supabaseService.guardarResultado(email, 'juego-colores', puntaje);
+    } catch (e) {
+      console.error('Error guardando resultado (juego-colores):', e);
+    }
+  }
 }
+

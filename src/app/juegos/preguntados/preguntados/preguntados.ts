@@ -4,6 +4,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ServicioPreguntas, Pregunta } from '../../../services/preguntas';
 import { Navbar } from '../../../components/navbar/navbar';
+import { SupabaseService } from '../../../services/supabase';
 
 @Component({
   selector: 'app-preguntados',
@@ -16,15 +17,19 @@ export class Preguntados implements OnInit {
   pregunta?: Pregunta;
   cargando = false;
   puntaje = 0;
+  totalPreguntas = 4; 
+  respondidas = 0;
 
   opcionSeleccionada?: string;
   esCorrecta = false;
   mostrarContinuar = false;
   respuestaBloqueada = false;
 
-  constructor(private trivia: ServicioPreguntas) {}
+  constructor(private trivia: ServicioPreguntas, private supabaseService: SupabaseService) {}
 
   ngOnInit() {
+    this.puntaje = 0;
+    this.respondidas = 0;
     this.cargarPregunta();
   }
 
@@ -45,7 +50,6 @@ export class Preguntados implements OnInit {
       },
       error: () => {
         this.cargando = false;
-        alert('Error al cargar la pregunta');
       }
     });
   }
@@ -66,6 +70,24 @@ export class Preguntados implements OnInit {
 
   siguientePregunta() {
     this.mostrarContinuar = false;
+    this.respondidas++;
+    if (this.respondidas >= this.totalPreguntas) {
+      this.respuestaBloqueada = true;
+      this.cargando = false;
+      this.guardarResultado();
+      return;
+    }
     this.cargarPregunta();
+  }
+  
+  private async guardarResultado() {
+    const user = await this.supabaseService.getUsuarioActual();
+    if (!user) return;
+    const email = user.email || 'desconocido';
+    try {
+      await this.supabaseService.guardarResultado(email, 'preguntados', this.puntaje);
+    } catch (e) {
+      console.error('Error guardando resultado (preguntados):', e);
+    }
   }
 }

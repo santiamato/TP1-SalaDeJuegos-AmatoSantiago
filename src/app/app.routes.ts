@@ -4,6 +4,7 @@ import { Login } from './components/login/login';
 import { QuienSoy } from './components/quien-soy/quien-soy';
 import { Registro } from './components/registro/registro';
 import { ChatComponent } from './components/chat/chat';
+import { EncuestaComponent } from './components/encuesta/encuesta';
 
 export const routes: Routes = [
     {
@@ -30,6 +31,10 @@ export const routes: Routes = [
     {
         path: 'chat',
         component: ChatComponent
+    },
+    {
+        path: 'encuesta',
+        component: EncuestaComponent
     },
     {
         path: 'juegos',
